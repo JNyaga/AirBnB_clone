@@ -115,6 +115,7 @@ class HBNBCommand(cmd.Cmd):
             key = "{}.{}".format(args[0], args[1])
             dic = eval(args[2])
             for k, v in dic.items():
+                # for when input is dictionary
                 # # vcast = type(eval(v))
                 # v = v.strip('"')
                 # v = v.strip("'")
@@ -188,6 +189,7 @@ class HBNBCommand(cmd.Cmd):
                     arg = class_arg + ' ' + id_arg + ' ' + name_arg + ' ' + val_arg
                     HBNBCommand.do_update(self, arg)
                 else:
+                    # for when input is dictionary
                     index = args[1].find(",")
                     id_arg = args[1][:index].strip("'")
                     id_arg = id_arg.strip('"')
@@ -207,6 +209,7 @@ def parse(line):
     if "{" not in line:
         return tuple(line.split())
     else:
+        # for when input is dictionary
         i = line.find("{")
         li = line[:i].split()
         li.append(line[i:])
