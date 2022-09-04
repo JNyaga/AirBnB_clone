@@ -121,9 +121,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found **")
         elif len(args) == 2:
             print("** attribute name missing **")
-        else:
-            print("** value missing **")
-        if len(args) == 3:
+        elif len(args) == 3:
             key = "{}.{}".format(args[0], args[1])
             dic = eval(args[2])
             for k, v in dic:
@@ -133,6 +131,8 @@ class HBNBCommand(cmd.Cmd):
                 v = vcast(v)
                 setattr(storage.all()[key], k, v)
                 storage.all()[key].save()
+        else:
+            print("** value missing **")
 
     def do_count(self, line):
         """Display count of instances specified"""
