@@ -1,12 +1,14 @@
 #!/usr/bin/python3
-""" User class """
+"""user class
+"""
 
-import uuid
 from models.base_model import BaseModel
+import json
 
 
 class User(BaseModel):
-    """ User class """
+    '''base model class'''
+
     email = ""
     password = ""
     first_name = ""
