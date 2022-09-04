@@ -191,10 +191,10 @@ class HBNBCommand(cmd.Cmd):
                     index = args[1].find(",")
                     id_arg = args[1][:index].strip("'")
                     id_arg = id_arg.strip('"')
-                    dic = args[1][index+1:].strip("\\) ")
+                    dic = args[1][index+1:].strip(") ")
                     dic = eval(dic)
-                    dic_str = f"{dic}"
-                    arg = class_arg + ' ' + id_arg + ' ' + dic_str
+                    # dic_str = f"{dic}"
+                    arg = class_arg + ' ' + id_arg + ' ' + str(dic)
                     HBNBCommand.do_update(self, arg)
             else:
                 print("*** Unknown syntax: {}".format(line))
@@ -204,7 +204,13 @@ class HBNBCommand(cmd.Cmd):
 
 def parse(line):
     """Helper method to parse user typed input"""
-    return tuple(line.split())
+    if "{" not in line:
+        return tuple(line.split())
+    else:
+        i = line.find("{")
+        li = line[:i].split()
+        li.append(line[i:])
+        return tuple(li)
 
 
 if __name__ == "__main__":
