@@ -103,16 +103,6 @@ class HBNBCommand(cmd.Cmd):
     def do_update(self, line):
         """Update if given exact object, exact attribute"""
         args = parse(line)
-        if len(args) == 3:
-            key = "{}.{}".format(args[0], args[1])
-            dic = eval(args[2])
-            for k, v in dic.items():
-                vcast = type(eval(v))
-                v = v.strip('"')
-                v = v.strip("'")
-                v = vcast(v)
-                setattr(storage.all()[key], k, v)
-                storage.all()[key].save()
         if len(args) >= 4:
             key = "{}.{}".format(args[0], args[1])
             cast = type(eval(args[3]))
@@ -121,6 +111,16 @@ class HBNBCommand(cmd.Cmd):
             arg3 = arg3.strip("'")
             setattr(storage.all()[key], args[2], cast(arg3))
             storage.all()[key].save()
+        elif len(args) == 3:
+            key = "{}.{}".format(args[0], args[1])
+            dic = eval(args[2])
+            for k, v in dic.items():
+                # # vcast = type(eval(v))
+                # v = v.strip('"')
+                # v = v.strip("'")
+                # v = vcast(v)
+                setattr(storage.all()[key], k, v)
+                storage.all()[key].save()
         elif len(args) == 0:
             print("** class name missing **")
         elif args[0] not in HBNBCommand.classes:
